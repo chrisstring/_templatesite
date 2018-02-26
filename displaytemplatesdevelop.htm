@@ -1,11 +1,64 @@
 <html>
 	<head>
 		<title>Display Template: Development</title>
+		<style>
+		body {font-family: helvetica; font-size:12px;}
+		p {line-height:1.5em;}
 
-							<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-							<script>
+		form input, #exportcsv {padding:1em;border:none;}
+		form#ir_form{font-size:1.3em;text-align:center;padding:0;margin:auto;}
+		#ir_name{border: 1px #d0d0d0 solid;}
 
-							var bigData = {
+		ul {list-style-type:none;}
+		li.odd {background-color:#f1f1f1;}
+		li.main-image{background-color:#f2a85d;} /*F19231*/
+		li.coupedoor, li.moredoor{background-color:#99D9DD;}
+		#generator_help span {font-weight:bold; color:#49b8bf;}
+		li.sku{padding:2em;font-size:1.5em;color:#666666;cursor: text;}
+		li.selected{background-color:#f8b067;}
+
+		ul.skuimage-list li {float:left;}
+		.sku-name {padding:1em;}
+		.skuimage-list img{margin:.5em;}
+		ul#parentskulist{padding:0;}
+		CANCEL.clear {clear: both;}
+		.clearfix::after {
+			 content: " ";
+			 display: block;
+			 height: 0;
+			 clear: both;
+			 *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML += '<div class="ie7-clear"></div>' );
+		}
+
+		.ie7-clear {
+				display: block;
+				clear: both;
+		}
+
+		#sku_submit{background-color:#DA0A62;color:#ffffff;font-weight:bold;cursor: pointer; cursor: hand;}
+		#exportcsv{background-color:#DA0A62;width:100%;text-align:center;margin:3em 0em;color:#ffffff;padding:2em 0em;}
+		#exportcsv:hover,label,.sku-name{cursor: pointer; cursor: hand;}
+		#exportcsv:hover, #sku-submit:hover{background-color:#DA0A62;}
+		.sku-name:hover{background-color:#eca862;color:#fff;}
+		li.selected ul li.sku {color:#ffffff;}
+		.hidden {display:none;}
+
+		div#buttz{width:610px; margin:auto;}
+		div#spanid{text-align:left;line-height:1.5em;font-size:.8em;margin:auto;width:550px;padding:0;}
+		a#clickhelp, a{cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
+		a#clickhelp:hover{color:#301231;}
+
+		#exportcsv.disabled{background-color:#333;cursor:not-allowed;}
+		#allnone, .mainall {font-weight:bold; cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
+		#allnone:hover{color:#301231;}
+
+		.select-container, option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;}
+		</style>
+
+			<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+			<script>
+
+				var bigData = {
 							   "Accessories": [
 							      {
 							         "Subcategory": null,
@@ -14219,41 +14272,70 @@
 							      }
 							   ]
 							};
-
-							$(document).ready(function(){
-
-							var preload = performance.now();
-							console.log(bigData);
-							console.log("JSON load time:",performance.now()-preload,"ms");
-
-							}); // end document ready
-							</script>
-
-	<style>
+							// end bigData
 
 
 
-	</style>
+				function onlyUnique(value,index,self){
+					return self.indexOf(value) === index;
+
+				} //end of onlyUnique function
+
+
+
+				$(document).ready(function(){
+
+					$("#category-select").empty(); // clear category values
+					$("#category-select").append("<option id='option-header'>Category</option>")
+					// load category data
+					$.each(bigData,function(key,value){
+						//console.log(key);
+						$("#category-select").append("<option value='"+key+"' id='id_"+value[0]["template_id"]+"'>" + key +"</option>");
+						//console.log(this.value);
+					}); // end load category data
+					var preload = performance.now();
+					console.log(bigData);
+					console.log("JSON load time:",performance.now()-preload,"ms");
+
+
+
+					// Subcategory population
+					$('select[id="category-select"]').change(function(){
+						var catSelected = $(this).val();
+						console.log("selected value: "+catSelected);
+						//clear the items-select list
+							$('#items-select').empty();
+						//clear the Subcategory list too!
+							$("#subcategory-select").empty();
+						//add in the default ALL option
+							$("#subcategory-select").append("<option value='_all' id='subcat_all'>All</option>");
+						//populate the Subcategory list
+							$.each(bigData[catSelected],function(key, val){
+									if (val["Subcategory"]!=null && val["Item"]==null){$("#subcategory-select").append("<option value='"+val["Subcategory"]+"' id='id_"+val["template_id"]+"'>"+val["Subcategory"]+"</option>");}	// add it!
+									//$('#items-select').
+									console.log("catSelected: ",key," : ",val);
+							}); // end subCat population iteration
+						//show subcategory-select
+
+						$('#subcategory-select').removeClass("hidden");
+
+					}); //end category-select change function
+
+
+			}); // end document ready
+			</script>
 
 
 </head>
 
 <body>
 	<div id="drop-nav" class="big-block">
-		<!-- <ul id="category-select" class="horizontal-ul">
-			</ul> end category ul
-			<ul id="subcategory-select" class="horizontal-ul">
-			</ul> end subcategory ul
-			<ul id="subcategory2-select" class="horizontal-ul">
-			</ul>
-			end of ul block comment
-		-->
 
 		<!-- begin select code -->
 		<form id="nav-form" action="borked.html">
-			<select id="category-select"></select>
-			<select id="subcategory-select" class="hidden"></select>
-			<select id="items-select" class="hidden"></select><!-- these will auto populate depending on the prior options -->
+			<select id="category-select" class="select-container"></select>
+			<select id="subcategory-select" class="select-container hidden"></select>
+			<select id="items-select" class="select-container hidden"></select><!-- these will auto populate depending on the prior options -->
 		</form>
 	</div><!-- end drop-nav div-->
 
