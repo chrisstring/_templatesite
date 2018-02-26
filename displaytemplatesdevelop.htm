@@ -2,8 +2,8 @@
 	<head>
 		<title>Display Template: Development</title>
 		<style>
-		body {font-family: helvetica; font-size:12px;}
-		p {line-height:1.5em;}
+		body {font-family:Futura, "Trebuchet MS", Arial, sans-serif;}
+		p {line-height:1.8em; color:#777;}
 
 		form input, #exportcsv {padding:1em;border:none;}
 		form#ir_form{font-size:1.3em;text-align:center;padding:0;margin:auto;}
@@ -53,6 +53,13 @@
 		#allnone:hover{color:#301231;}
 
 		.select-container, option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;}
+
+		.divnotes, #photonotes, #retouchnotes{padding:1em;background-color:#fafafa;margin-left:2em;border-left:.5em solid #f0f0f0;width:50em;float:left;font-size:.8em;margin-bottom:.5em;}
+		#retouchnotes {border-color:#85a9c7;}
+		#photonotes{border-color:#a5c785;}
+		label {font-weight:bold;}
+
+
 		</style>
 
 			<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -14286,6 +14293,7 @@
 				$(document).ready(function(){
 
 					$("#category-select").empty(); // clear category values
+					//populate drop down list
 					$("#category-select").append("<option id='option-header'>Category</option>")
 					// load category data
 					$.each(bigData,function(key,value){
@@ -14299,8 +14307,9 @@
 
 
 
-					// Subcategory population
+					// Subcategory population + note creation
 					$('select[id="category-select"]').change(function(){
+
 						var catSelected = $(this).val();
 						console.log("selected value: "+catSelected);
 						//clear the items-select list
@@ -14339,7 +14348,17 @@
 		</form>
 	</div><!-- end drop-nav div-->
 
-	<div id="content-div" class="big-block">
+	<div id="photonotes" class="divnotes">
+		<label for="photonotes">Photo Notes</label>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+	</div><!-- end photonotes div -->
+	<p></p>
+	<div id="retouchnotes" class="divnotes">
+		<label for="retouchnotes">Retouch Notes</label>
+		<p>Nullam consequat enim id ex fermentum, sed faucibus nisl rhoncus. Sed ultrices feugiat consequat. Aliquam erat volutpat. Suspendisse sodales risus vitae justo elementum, vel commodo lacus mollis. Etiam at odio eget ex fermentum porta. Aliquam dolor erat, tincidunt et faucibus et, egestas vitae eros. Nam urna arcu, cursus id mauris eu, scelerisque convallis augue. Nulla dapibus ac ligula sed cursus. Aenean pulvinar nisl ac euismod euismod.</p>
+	</div><!-- end retouchnotes div -->
+
+	<div id="content-div" class="big-block clear">
 
 	</div><!-- end content-div -->
 
