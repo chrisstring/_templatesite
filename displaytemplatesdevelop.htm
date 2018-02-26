@@ -1578,8 +1578,8 @@
 							         "Brand": "Trucks",
 							         "Item": "Differential Carriers",
 							         "Matching SKU": "bad url",
-							         "Photo URL": "Current images are vendor - will be updated once shot by us",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "Current images are vendor - will be updated once shot by us",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -1597,8 +1597,8 @@
 							         "Brand": "Trucks",
 							         "Item": "Differential Covers",
 							         "Matching SKU": "bad url",
-							         "Photo URL": "Current images are vendor - will be updated once shot by us",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "Current images are vendor - will be updated once shot by us",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -3273,8 +3273,8 @@
 							         "Brand": "Trucks",
 							         "Item": "Down Pipes",
 							         "Matching SKU": "bad url",
-							         "Photo URL": "Current images are vendor - will be updated once shot by us",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "Current images are vendor - will be updated once shot by us",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -3292,8 +3292,8 @@
 							         "Brand": "Trucks",
 							         "Item": "Exhaust Tips",
 							         "Matching SKU": "bad url",
-							         "Photo URL": "Current images are vendor - will be updated once shot by us",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "Current images are vendor - will be updated once shot by us",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -3311,8 +3311,8 @@
 							         "Brand": "Trucks",
 							         "Item": "Headers",
 							         "Matching SKU": "bad url",
-							         "Photo URL": "Current images are vendor - will be updated once shot by us",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "Current images are vendor - will be updated once shot by us",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -3349,8 +3349,8 @@
 							         "Brand": "Trucks",
 							         "Item": "Resonator Delete Kits",
 							         "Matching SKU": "bad url",
-							         "Photo URL": "Current images are vendor - will be updated once shot by us",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "Current images are vendor - will be updated once shot by us",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -10556,8 +10556,8 @@
 							         "Brand": "Trucks",
 							         "Item": null,
 							         "Matching SKU": null,
-							         "Photo URL": "ALL LIGHTS�EXCEPT HEADLIGHTS�NEED TO BE LIT IN TIGHT 3/4 ANGLE. IF LIGHT(S) INCLUDE COVER, COVER SHOULD BE ON IN ALL ANGLES, ON AND OFF IN TIGHT 3/4 ANGLE",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "ALL LIGHTS�EXCEPT HEADLIGHTS�NEED TO BE LIT IN TIGHT 3/4 ANGLE. IF LIGHT(S) INCLUDE COVER, COVER SHOULD BE ON IN ALL ANGLES, ON AND OFF IN TIGHT 3/4 ANGLE",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -12713,8 +12713,8 @@
 							         "Brand": "Extreme Terrain",
 							         "Item": null,
 							         "Matching SKU": null,
-							         "Photo URL": "ALL LIGHTS�EXCEPT HEADLIGHTS�NEED TO BE LIT IN TIGHT 3/4 ANGLE. IF LIGHT(S) INCLUDE COVER, COVER SHOULD BE ON IN ALL ANGLES, ON AND OFF IN TIGHT 3/4 ANGLE",
-							         "Photo Notes": "",
+							         "Photo URL": null,
+							         "Photo Notes": "ALL LIGHTS�EXCEPT HEADLIGHTS�NEED TO BE LIT IN TIGHT 3/4 ANGLE. IF LIGHT(S) INCLUDE COVER, COVER SHOULD BE ON IN ALL ANGLES, ON AND OFF IN TIGHT 3/4 ANGLE",
 							         "Retouch Notes": "",
 							         "On-Car Shots": null,
 							         "Off-Car Shots": null,
@@ -14281,20 +14281,11 @@
 							};
 							// end bigData
 
-
-
-				function onlyUnique(value,index,self){
-					return self.indexOf(value) === index;
-
-				} //end of onlyUnique function
-
-
-
 				$(document).ready(function(){
 
 					$("#category-select").empty(); // clear category values
 					//populate drop down list
-					$("#category-select").append("<option id='option-header'>Category</option>")
+					$("#category-select").append("<option id='option-header'>Category</option>");
 					// load category data
 					$.each(bigData,function(key,value){
 						//console.log(key);
