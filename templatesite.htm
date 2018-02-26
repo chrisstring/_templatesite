@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>IMAGE LOOKUP v3.5.5 by Topher Null</title>
+<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nlfbmbojpeacfghkpbjhddihlkkiljbi">
+<!--
+
+Version: v3.5.5
+20171019
+Author Christopher String
+This webpage allows users to plug in an IR ID and have the following functionality available to them:
+
+===================
+Implemented:
+1.	Display / pre-load images for the skus given a space delimited list of skus
+2.	Allow users to select SKUS for CSV export (no multi or shift click option, sorry)
+3.	export into CSV
+4.  view skus via job
+5.  display coupedoor/moredoor assets for wheel generator if they exist
+6.  Duplicate skus are removed before the display function is run, prevents export errors
+7.  Ability to show LARGE size images for COPY's needs
+===================
+Not Implemented yet:
+
+===================
+
+
+COLOUR PALETTE FROM HERE
+http://www.colourlovers.com/palette/3739957/Snow_Change
+-->
+
+
+<style>
+
+body {font-family: helvetica; font-size:12px;}
+p {line-height:1.5em;}
+
+form input, #exportcsv {padding:1em;border:none;}
+form#ir_form{font-size:1.3em;text-align:center;padding:0;margin:auto;}
+#ir_name{border: 1px #d0d0d0 solid;}
+
+ul {list-style-type:none;}
+li.odd {background-color:#f1f1f1;}
+li.main-image{background-color:#f2a85d;} /*F19231*/
+li.coupedoor, li.moredoor{background-color:#99D9DD;}
+#generator_help span {font-weight:bold; color:#49b8bf;}
+li.sku{padding:2em;font-size:1.5em;color:#666666;cursor: text;}
+li.selected{background-color:#f8b067;}
+
+ul.skuimage-list li {float:left;}
+.sku-name {padding:1em;}
+.skuimage-list img{margin:.5em;}
+ul#parentskulist{padding:0;}
+CANCEL.clear {clear: both;}
+.clearfix::after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+   *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML += '<div class="ie7-clear"></div>' );
+}
+
+.ie7-clear {
+    display: block;
+    clear: both;
+}
+
+#sku_submit{background-color:#DA0A62;color:#ffffff;font-weight:bold;cursor: pointer; cursor: hand;}
+#exportcsv{background-color:#DA0A62;width:100%;text-align:center;margin:3em 0em;color:#ffffff;padding:2em 0em;}
+#exportcsv:hover,label,.sku-name{cursor: pointer; cursor: hand;}
+#exportcsv:hover, #sku-submit:hover{background-color:#DA0A62;}
+.sku-name:hover{background-color:#eca862;color:#fff;}
+li.selected ul li.sku {color:#ffffff;}
+.hidden {display:none;}
+
+div#buttz{width:610px; margin:auto;}
+div#spanid{text-align:left;line-height:1.5em;font-size:.8em;margin:auto;width:550px;padding:0;}
+a#clickhelp, a{cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
+a#clickhelp:hover{color:#301231;}
+
+#exportcsv.disabled{background-color:#333;cursor:not-allowed;}
+#allnone, .mainall {font-weight:bold; cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
+#allnone:hover{color:#301231;}
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
