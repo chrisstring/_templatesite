@@ -14302,34 +14302,35 @@
 							$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
 						// set the compare array to empty, we will build the options from there!
 							var subCatCompareArray = [];
-							$.each(bigData[catSelected],function(key, val){
-									if (val["Subcategory"]!=null && val["Item"]==null){
-										// subcategories have an ITEM as null
-										// add to the compareArray
-										subCatCompareArray.push();
-										var curBrand = val["Brand"];
-										var shortBrand="no-brand";
-										var curSubcat = val["Subcategory"];
-										var curTemplateId = val["template_id"];
-										var curPhotoNotes = val["Photo Notes"];
-										var curRetouchNotes = val["Retouch Notes"];
+							$.each(bigData[catSelected],function(key, val)
+							{
+										if (val["Item"]==null)
+										{
+											// Category items have a Subcategory and Item that's null.
+											var curBrand = val["Brand"];
+											var shortBrand="no-brand";
+											var curSubcat = val["Subcategory"];
+											var curTemplateId = val["template_id"];
+											var curPhotoNotes = val["Photo Notes"];
+											var curRetouchNotes = val["Retouch Notes"];
 
-										if (curBrand=='American Muscle'){shortBrand="am";}
-										if (curBrand=='Extreme Terrain'){shortBrand="xt";}
-										if (curBrand=='Trucks'){shortBrand="at";}
+											if (curBrand=='American Muscle'){shortBrand="am";}
+											if (curBrand=='Extreme Terrain'){shortBrand="xt";}
+											if (curBrand=='Trucks'){shortBrand="at";}
 
-													$("#subcategory-select").append("<option value='"+curSubcat+"' id='id_"+curTemplateId+"'>"+curSubcat+"</option>");
+											// Populate the subcategory dropdown with only values that are not null!
+											if(curSubcat!=null){$("#subcategory-select").append("<option value='"+curSubcat+"' id='id_"+curTemplateId+"'>"+curSubcat+"</option>");} // end the subcategory null check
 												// are there photo notes for the SPECIFIC subcategory?
-													if (curPhotoNotes!=null){$("#photonotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curPhotoNotes+"</p>");} // end photonotes fill
+											if (curPhotoNotes!=null && val["Subcategory"]==null){$("#photonotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curPhotoNotes+"</p>");} // end photonotes fill
 												// are there retouch notes for the SPECIFIC subcategory?
-													if (curRetouchNotes!=null){$("#retouchnotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curRetouchNotes+"</p>");} // end photonotes fill
+											if (curRetouchNotes!=null && val["Subcategory"]==null){$("#retouchnotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curRetouchNotes+"</p>");} // end photonotes fill
 
 
 
-									}	// add it!
+											}	// add it! end of subcategory check
 
-									//console.log("catSelected: ",key," : ",val);
-							}); // end subCat population iteration
+										//console.log("catSelected: ",key," : ",val);
+								}); // end subCat population iteration
 						//show subcategory-select
 
 						$('#subcategory-select').removeClass("hidden");
