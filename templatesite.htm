@@ -52,7 +52,7 @@
 		#allnone, .mainall {font-weight:bold; cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
 		#allnone:hover{color:#301231;}
 
-		.select-container, option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;}
+		.select-container, option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;margin-bottom:.25em;}
 
 		.divnotes, #photonotes, #retouchnotes{padding:1em;background-color:#fafafa;margin-left:2em;border-left:.5em solid #f0f0f0;width:50em;float:left;font-size:.8em;margin-bottom:.5em;}
 		#retouchnotes {border-color:#354355;}
@@ -14266,11 +14266,12 @@
 };
 							// end bigData
 
-				$(document).ready(function(){
+			$(document).ready(function(){
+					$("#nav-form").on('submit',function(event){event.preventDefault();});
 
 					$("#category-select").empty(); // clear category values
 					//populate drop down list
-					$("#category-select").append("<option id='option-header'>Category</option>");
+					$("#category-select").append("<option id='option-header'>Select Category</option>");
 					// load category data
 					$.each(bigData,function(key,value){
 						//console.log(key);
@@ -14287,11 +14288,12 @@
 					$('select[id="category-select"]').change(function(){
 
 						var catSelected = $(this).val();
-						console.log("selected value: "+catSelected);
+						console.log("Category: ",catSelected);
 						//clear the items-select list
 							$('#items-select').empty();
 						//clear the Subcategory list too!
 							$("#subcategory-select").empty();
+							$("#subcategory-select").append("<option>Select Subcategory</option>");
 						//add in the default ALL option
 							$("#subcategory-select").append("<option value='_all' id='subcat_all'>All</option>");
 						//populate the Subcategory list
@@ -14301,12 +14303,15 @@
 						// clear the retouch notes:
 							$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
 						// set the compare array to empty, we will build the options from there!
-							var subCatCompareArray = [];
+							var subCatCompareArray = [];  // compare the subCategory entries, initialize empty array
 							$.each(bigData[catSelected],function(key, val)
 							{
+
+											// Category items have a Subcategory and Item that's null.
 										if (val["Item"]==null)
 										{
-											// Category items have a Subcategory and Item that's null.
+											//must mean it's a category if ITEM is null.
+
 											var curBrand = val["Brand"];
 											var shortBrand="no-brand";
 											var curSubcat = val["Subcategory"];
@@ -14324,19 +14329,79 @@
 											if (curPhotoNotes!=null && val["Subcategory"]==null){$("#photonotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curPhotoNotes+"</p>");} // end photonotes fill
 												// are there retouch notes for the SPECIFIC subcategory?
 											if (curRetouchNotes!=null && val["Subcategory"]==null){$("#retouchnotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curRetouchNotes+"</p>");} // end photonotes fill
-
-
-
-											}	// add it! end of subcategory check
-
-										//console.log("catSelected: ",key," : ",val);
+										}	// add it! end of subcategory check
 								}); // end subCat population iteration
-						//show subcategory-select
 
-						$('#subcategory-select').removeClass("hidden");
+							$('#subcategory-select option').each(function()
+							{
+									if($.inArray(this.value, subCatCompareArray)>-1)
+									{
+										$(this).remove();
+									}else{
+										subCatCompareArray.push(this.value);
+									}
+							});
+
+						//show subcategory-select
+						$('#subcategory-select').removeClass("hidden"); // show the subcategory
 
 					}); //end category-select change function
 
+					// Items drop down population + note creation
+					$('select[id="subcategory-select"]').change(function()
+					{
+						var subCatSelected = $(this).val();
+						var catSelected =$('select[id="category-select"]').val();
+						console.log("Subcategory:",subCatSelected);
+						//clear the items-select list
+						$('#items-select').empty();
+
+						// populate first item
+						$("#items-select").append("<option>Select Item</option>");
+								// clear the photo notes:
+						$("#photonotes").empty().append('<label for="photonotes">Photo Notes</label>');
+							// clear the retouch notes:
+						$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
+
+							$.each(bigData[catSelected],function(key, val)
+							{
+								// populate the ITEMLIST dropdown if subcat is something specific
+								if (val["Subcategory"]==subCatSelected && val["Item"]!=null){
+									var curBrand = val["Brand"];
+									var shortBrand="no-brand";
+									var curSubcat = val["Subcategory"];
+									var curTemplateId = val["template_id"];
+									var curPhotoNotes = val["Photo Notes"];
+									var curRetouchNotes = val["Retouch Notes"];
+
+									if (curBrand=='American Muscle'){shortBrand="am";}
+									if (curBrand=='Extreme Terrain'){shortBrand="xt";}
+									if (curBrand=='Trucks'){shortBrand="at";}
+
+									$("#items-select").append("<option value='"+val["Item"]+"'>"+val["Item"]+"</option>");
+
+										//print the item value?
+										console.log(val["Item"]);
+								}
+							}); // end bigData crawl
+
+						// purge duplicates out of items list
+						var tmpArrayVals = [];
+						$('#items-select option').each(function(){
+								if ($.inArray(this.value,tmpArrayVals)>-1){
+									$(this).remove();
+								}else{
+									tmpArrayVals.push(this.value);
+								} // end inner if-else statement
+
+						}); // end items-select option each function
+
+						// show the itemsList
+						$('#items-select').removeClass("hidden");
+
+
+					});
+					// end subcategory selection change
 
 			}); // end document ready
 			</script>
