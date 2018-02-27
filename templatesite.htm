@@ -55,8 +55,12 @@
 		.select-container, option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;}
 
 		.divnotes, #photonotes, #retouchnotes{padding:1em;background-color:#fafafa;margin-left:2em;border-left:.5em solid #f0f0f0;width:50em;float:left;font-size:.8em;margin-bottom:.5em;}
-		#retouchnotes {border-color:#85a9c7;}
+		#retouchnotes {border-color:#354355;}
 		#photonotes{border-color:#a5c785;}
+		p.am, p.xt,p.at {border-left:3px solid #ccc;padding-left:1em;}
+			#photonotes p.at{border-left-color:#a3406a;}
+			#photonotes p.am{border-left-color:#85a9c7;}
+			#photonotes p.xt{}
 		label {font-weight:bold;}
 
 
@@ -14296,16 +14300,29 @@
 							$("#photonotes").empty().append('<label for="photonotes">Photo Notes</label>');
 						// clear the retouch notes:
 							$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
+						// set the compare array to empty, we will build the options from there!
+							var subCatCompareArray = [];
 							$.each(bigData[catSelected],function(key, val){
-									// subcategories have an ITEM as null
-
 									if (val["Subcategory"]!=null && val["Item"]==null){
+										// subcategories have an ITEM as null
+										// add to the compareArray
+										subCatCompareArray.push();
+										var curBrand = val["Brand"];
+										var shortBrand="no-brand";
+										var curSubcat = val["Subcategory"];
+										var curTemplateId = val["template_id"];
+										var curPhotoNotes = val["Photo Notes"];
+										var curRetouchNotes = val["Retouch Notes"];
 
-										$("#subcategory-select").append("<option value='"+val["Subcategory"]+"' id='id_"+val["template_id"]+"'>"+val["Subcategory"]+"</option>");
-										// are there photo notes for the SPECIFIC subcategory?
-											if (val["Photo Notes"]!=null){$("#photonotes").append("<p>",val["Photo Notes"],"</p>");} // end photonotes fill
-										// are there retouch notes for the SPECIFIC subcategory?
-											if (val["Retouch Notes"]!=null){$("#retouchnotes").append("<p>",val["Retouch Notes"],"</p>");} // end photonotes fill
+										if (curBrand=='American Muscle'){shortBrand="am";}
+										if (curBrand=='Extreme Terrain'){shortBrand="xt";}
+										if (curBrand=='Trucks'){shortBrand="at";}
+
+													$("#subcategory-select").append("<option value='"+curSubcat+"' id='id_"+curTemplateId+"'>"+curSubcat+"</option>");
+												// are there photo notes for the SPECIFIC subcategory?
+													if (curPhotoNotes!=null){$("#photonotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curPhotoNotes+"</p>");} // end photonotes fill
+												// are there retouch notes for the SPECIFIC subcategory?
+													if (curRetouchNotes!=null){$("#retouchnotes").append("<p title='"+curBrand+"' class='"+shortBrand+"'>"+curRetouchNotes+"</p>");} // end photonotes fill
 
 
 
