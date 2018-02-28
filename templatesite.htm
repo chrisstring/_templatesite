@@ -2,7 +2,7 @@
 	<head>
 		<title>Display Template: Development</title>
 		<style>
-		body {font-family:Futura, "Trebuchet MS", Arial, sans-serif;}
+		body {font-family:Futura, "Trebuchet MS", Arial, sans-serif; padding:0;margin:0;}
 		p {line-height:1.8em; color:#777;}
 
 		form input, #exportcsv {padding:1em;border:none;}
@@ -29,7 +29,6 @@
 			 clear: both;
 			 *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML += '<div class="ie7-clear"></div>' );
 		}
-
 		.ie7-clear {
 				display: block;
 				clear: both;
@@ -62,6 +61,7 @@
 			#photonotes p.am{border-left-color:#85a9c7;}
 			#photonotes p.xt{}
 		label {font-weight:bold;}
+		#nav-form{width:100%;margin:0;background-color:#354b66;padding:.5em;}
 
 
 		</style>
@@ -14365,24 +14365,35 @@
 
 							$.each(bigData[catSelected],function(key, val)
 							{
+								// set loop variables BEFORE THE LOOP:
+								var curBrand = val["Brand"];
+								var shortBrand="no-brand";
+								var curSubcat = val["Subcategory"];
+								var curTemplateId = val["template_id"];
+								var curPhotoNotes = val["Photo Notes"];
+								var curRetouchNotes = val["Retouch Notes"];
+
+								if (curBrand=='American Muscle'){shortBrand="am";}
+								if (curBrand=='Extreme Terrain'){shortBrand="xt";}
+								if (curBrand=='Trucks'){shortBrand="at";}
+
+
 								// populate the ITEMLIST dropdown if subcat is something specific
-								if (val["Subcategory"]==subCatSelected && val["Item"]!=null){
-									var curBrand = val["Brand"];
-									var shortBrand="no-brand";
-									var curSubcat = val["Subcategory"];
-									var curTemplateId = val["template_id"];
-									var curPhotoNotes = val["Photo Notes"];
-									var curRetouchNotes = val["Retouch Notes"];
+								if (subCatSelected!="_all")
+								{
+									if (val["Subcategory"]==subCatSelected && val["Item"]!=null)
+									{
+										$("#items-select").append("<option value='"+val["Item"]+"'>"+val["Item"]+"</option>");
+											//print the item value?
+											console.log(val["Item"]);
+									} // end of the check for _all to populate itemlist
 
-									if (curBrand=='American Muscle'){shortBrand="am";}
-									if (curBrand=='Extreme Terrain'){shortBrand="xt";}
-									if (curBrand=='Trucks'){shortBrand="at";}
+								}else {
+										// edit this later, you need to check for instances where the subCatSelected == _all, if that's the case then
+										// iterate through all items where val['Subcategory'==null]
+										if (val['Subcategory']==null && val['Item']!=null){$("#items-select").append("<option value='id_"+val["template_id"]+"'>"+val["Item"]+"</option>");} // end adding to itemlist
 
-									$("#items-select").append("<option value='"+val["Item"]+"'>"+val["Item"]+"</option>");
-
-										//print the item value?
-										console.log(val["Item"]);
-								}
+								} // else-if
 							}); // end bigData crawl
 
 						// purge duplicates out of items list
