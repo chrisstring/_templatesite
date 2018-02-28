@@ -4,7 +4,7 @@
 		<style>
 		body {font-family:Futura, "Trebuchet MS", Arial, sans-serif; padding:0;margin:0;}
 		p {line-height:1.8em; color:#777;}
-
+		form{margin-bottom:0;}
 		form input, #exportcsv {padding:1em;border:none;}
 		form#ir_form{font-size:1.3em;text-align:center;padding:0;margin:auto;}
 		#ir_name{border: 1px #d0d0d0 solid;}
@@ -51,8 +51,7 @@
 		#allnone, .mainall {font-weight:bold; cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
 		#allnone:hover{color:#301231;}
 
-		.select-container, option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;margin-bottom:.25em;}
-
+		.select-container, select option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;margin-bottom:.25em;}
 		.divnotes, #photonotes, #retouchnotes{padding:1em;background-color:#fafafa;margin-left:2em;border-left:.5em solid #f0f0f0;width:50em;float:left;font-size:.8em;margin-bottom:.5em;}
 		#retouchnotes {border-color:#354355;}
 		#photonotes{border-color:#a5c785;}
@@ -61,8 +60,9 @@
 			#photonotes p.am{border-left-color:#85a9c7;}
 			#photonotes p.xt{}
 		label {font-weight:bold;}
-		#nav-form{width:100%;margin:0;background-color:#354b66;padding:.5em;}
-
+		/* #nav-form{width:100%;margin:0;background-color:#354b66;padding:.5em;margin-bottom:1em;}*/
+		#drop-nav{width:100%;margin:0;background-color:#354b66;padding:.5em;margin-bottom:1em;}
+		#content-div{width:100%;margin:0;padding:1em;}
 
 		</style>
 
@@ -14266,6 +14266,30 @@
 };
 							// end bigData
 
+			// begin custom functions
+
+function printArrayItems(refArray)
+{
+	// print array items will drop each of the items in their appropriately named bucket (hint there's 3 of them: AM, AT[f150,silv,sier,ram,dodge],XT)
+	if(refArray.length==1){/*alert("array is 1 entry long!");*/}
+
+		$.each(refArray,function(key, val)
+			{
+
+			}); // end of refArray iteration
+}
+// end of printArrayItems
+
+
+
+
+
+
+
+
+
+			// end custom functions
+
 			$(document).ready(function(){
 					$("#nav-form").on('submit',function(event){event.preventDefault();});
 
@@ -14345,7 +14369,8 @@
 						//show subcategory-select
 						$('#subcategory-select').removeClass("hidden"); // show the subcategory
 
-					}); //end category-select change function
+					});
+					//end category-select change function
 
 					// Items drop down population + note creation
 					$('select[id="subcategory-select"]').change(function()
@@ -14391,7 +14416,7 @@
 								}else {
 										// edit this later, you need to check for instances where the subCatSelected == _all, if that's the case then
 										// iterate through all items where val['Subcategory'==null]
-										if (val['Subcategory']==null && val['Item']!=null){$("#items-select").append("<option value='id_"+val["template_id"]+"'>"+val["Item"]+"</option>");} // end adding to itemlist
+										if (val['Subcategory']==null && val['Item']!=null){$("#items-select").append("<option value='"+val["Item"]+"'>"+val["Item"]+"</option>");} // end adding to itemlist
 
 								} // else-if
 							}); // end bigData crawl
@@ -14414,6 +14439,29 @@
 					});
 					// end subcategory selection change
 
+					// begin itemsSelect change function
+					$('#items-select').change(function(){
+						var catSelected = $("#category-select option").filter(":selected").val();
+						var subCatSelected = $("#subcategory-select option").filter(":selected").val();
+						var curItem = $(this).val();
+						console.log("Item selected: ", curItem);
+
+						// iterate through the bigData array and drill it down!
+						var skuListArray=[];
+						$.each(bigData[catSelected],function(key, val)
+							{
+								// search for it
+								if (val["Item"]==curItem){
+									skuListArray.push(val);
+									//console.log(val);
+								}	//end of search Item
+							});
+								// end of array iterate, found our data, lets display them!
+								printArrayItems(skuListArray);
+					});
+					// end itemsSelect change function!
+
+
 			}); // end document ready
 			</script>
 
@@ -14431,17 +14479,27 @@
 		</form>
 	</div><!-- end drop-nav div-->
 
+<div id="notes-container" class="clearfix">
 	<div id="photonotes" class="divnotes">
 		<label for="photonotes">Photo Notes</label>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 	</div><!-- end photonotes div -->
-	<p></p>
 	<div id="retouchnotes" class="divnotes">
 		<label for="retouchnotes">Retouch Notes</label>
 		<p>Nullam consequat enim id ex fermentum, sed faucibus nisl rhoncus. Sed ultrices feugiat consequat. Aliquam erat volutpat. Suspendisse sodales risus vitae justo elementum, vel commodo lacus mollis. Etiam at odio eget ex fermentum porta. Aliquam dolor erat, tincidunt et faucibus et, egestas vitae eros. Nam urna arcu, cursus id mauris eu, scelerisque convallis augue. Nulla dapibus ac ligula sed cursus. Aenean pulvinar nisl ac euismod euismod.</p>
 	</div><!-- end retouchnotes div -->
+</div> <!-- end of notes-container div -->
 
-	<div id="content-div" class="big-block clear">
+	<div id="content-div" class="">
+		<div id='am-images' class='fullwidth'>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+		</div>
+		<div id='xt-images' class='fullwidth'>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+		</div>
+		<div id='at-images' class='fullwidth'>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+		</div>
 
 	</div><!-- end content-div -->
 

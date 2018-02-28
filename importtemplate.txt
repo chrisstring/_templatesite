@@ -281,9 +281,9 @@ Lights			American Muscle	Day Time Running Lights	not found on page	http://www.am
 Lights			American Muscle	Fog Lights	49179	http://www.americanmuscle.com/raxiom-yellow-foglights-1314gt.html		all on-car images are made from same angle	3	3-4	0.50			"2015GT, 2006GT"	"2015GT, 2006GT"		281
 Lights			American Muscle	Headlights	not found on page	http://www.americanmuscle.com/headlight-chrome-projector-1012-hid.html		all on-car images are made from front and front 3/4 angle	8	4	0.25			2006GT	2006GT		282
 Lights			American Muscle	Light Bars & Styling Bars	11053	http://www.americanmuscle.com/cdc-2005-carbon-lightbar.html		1 is crop of 3	4	3-4	1.50						283
-Lights			American Muscle	Marker Lights - Front	49191	http://www.americanmuscle.com/black-side-marker-1012.html		images 1-5 all created from 5	8	3	0.33			14GT	14GT	TRUE	284
-Lights			American Muscle	Marker Lights - Front & Rear	398126	https://www.americanmuscle.com/raxiom-clear-led-side-quarter-markers-10114.html			7	5							285
-Lights			American Muscle	Marker Lights - Rear	390341	https://www.americanmuscle.com/raxiom-red-led-sidemarker-1516.html			3								286
+Lights	Marker Lights		American Muscle	Front	49191	http://www.americanmuscle.com/black-side-marker-1012.html		images 1-5 all created from 5	8	3	0.33			14GT	14GT	TRUE	284
+Lights	Marker Lights		American Muscle	Front & Rear	398126	https://www.americanmuscle.com/raxiom-clear-led-side-quarter-markers-10114.html			7	5							285
+Lights	Marker Lights		American Muscle	Rear	390341	https://www.americanmuscle.com/raxiom-red-led-sidemarker-1516.html			3								286
 Lights			American Muscle	Reverse Light	393830	https://www.americanmuscle.com/oracle-high-power-reverse-light-clear-1517.html			4	3							287
 Lights	Sequential Tail Lights		American Muscle	Sequential Tail Lights	301042	http://www.americanmuscle.com/raxiom-sequential-harness-1014.html			5	3-4	0.33						288
 Lights	Sequential Tail Lights		American Muscle	Raxiom Sequential	49169	http://www.americanmuscle.com/raxiom-gen5-taillights-0509.html											289
