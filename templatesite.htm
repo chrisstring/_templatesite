@@ -6,21 +6,9 @@
 		p {line-height:1.8em; color:#777;}
 		form{margin-bottom:0;}
 		form input, #exportcsv {padding:1em;border:none;}
-		form#ir_form{font-size:1.3em;text-align:center;padding:0;margin:auto;}
 		#ir_name{border: 1px #d0d0d0 solid;}
 
 		ul {list-style-type:none;}
-		li.odd {background-color:#f1f1f1;}
-		li.main-image{background-color:#f2a85d;} /*F19231*/
-		li.coupedoor, li.moredoor{background-color:#99D9DD;}
-		#generator_help span {font-weight:bold; color:#49b8bf;}
-		li.sku{padding:2em;font-size:1.5em;color:#666666;cursor: text;}
-		li.selected{background-color:#f8b067;}
-
-		ul.skuimage-list li {float:left;}
-		.sku-name {padding:1em;}
-		.skuimage-list img{margin:.5em;}
-		ul#parentskulist{padding:0;}
 		CANCEL.clear {clear: both;}
 		.clearfix::after {
 			 content: " ";
@@ -33,23 +21,6 @@
 				display: block;
 				clear: both;
 		}
-
-		#sku_submit{background-color:#DA0A62;color:#ffffff;font-weight:bold;cursor: pointer; cursor: hand;}
-		#exportcsv{background-color:#DA0A62;width:100%;text-align:center;margin:3em 0em;color:#ffffff;padding:2em 0em;}
-		#exportcsv:hover,label,.sku-name{cursor: pointer; cursor: hand;}
-		#exportcsv:hover, #sku-submit:hover{background-color:#DA0A62;}
-		.sku-name:hover{background-color:#eca862;color:#fff;}
-		li.selected ul li.sku {color:#ffffff;}
-		.hidden {display:none;}
-
-		div#buttz{width:610px; margin:auto;}
-		div#spanid{text-align:left;line-height:1.5em;font-size:.8em;margin:auto;width:550px;padding:0;}
-		a#clickhelp, a{cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
-		a#clickhelp:hover{color:#301231;}
-
-		#exportcsv.disabled{background-color:#333;cursor:not-allowed;}
-		#allnone, .mainall {font-weight:bold; cursor: pointer; cursor: hand;font-weight:bold;color:#DA0A62;font-size:.8em;text-decoration:none;}
-		#allnone:hover{color:#301231;}
 
 		.select-container, select option{width:20em;padding:.75em; border:none;background-color:#f3f3f3;margin-bottom:.25em;}
 		.divnotes, #photonotes, #retouchnotes{padding:1em;background-color:#fafafa;margin-left:2em;border-left:.5em solid #f0f0f0;width:50em;float:left;font-size:.8em;margin-bottom:.5em;}
@@ -64,7 +35,13 @@
 		#drop-nav{/*width:100%;*/ margin:0;background-color:#354b66;padding:0;margin-bottom:1em;}
 		#nav-form{padding:.5em;}
 		#content-div{width:100%;margin:0;padding:0;}
-		.image-div {margin:.25em 0 0 0;padding:1em 1em 1em .5em;border-left:.25em solid #fff;border-right:.25em solid #fff;background:#fcfcfc;}
+		.image-div {margin:1em 0 0 0;padding:1em 1em 1em .5em;border-left:.5em solid #fff;border-right:10em solid #fff;background:#fcfcfc;}
+
+		ul.parentUl li {float:left;}
+		ul.parentUl li p {font-size:.8em;}
+
+		.hidden{display:none;}
+
 		</style>
 
 			<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -14282,29 +14259,47 @@ function printArrayItems(refArray)
 					$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
 
 					// populate AM
-					if (val["Brand"]=="American Muscle"){$("#am-images").empty().append(val["Matching SKU"]);} // end americanmuscle
-					else if (val["Brand"]=="Extreme Terrain"){$("#xt-images").empty().append(val["Matching SKU"]);} // end Extreme Terrain
-					else {$("#at-images").empty().append(val["Matching SKU"]);} // end Trucks
+					if (val["Brand"]=="American Muscle"){$("#am-images").empty().append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end americanmuscle
+					else if (val["Brand"]=="Extreme Terrain"){$("#xt-images").empty().append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Extreme Terrain
+					else {$("#at-images").empty().append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Trucks
 
 						// populate photonotes
 						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p>");
 						if (val["Retouch Notes"]!=null)$("#retouchnotes").append("<p>"+val["Retouch Notes"]+"</p>");
 
 
-
-
-
-
-
 			}); // end of refArray iteration
 }
 // end of printArrayItems
 
+function displaySKUImages(bra,sku){
+	var noskumsg="No images to display for this brand, please go in and fix the JSON data, and update the Matching SKU field thanks!";
+	var shortBrand="";
+	if(bra=="American Muscle"){shortBrand="am";} //am
+	if(bra=="Trucks"){shortBrand="at";} //at
+	if(bra=="Extreme Terrain"){shortBrand="xt";} //xt
+	if (sku==null || sku=="bad url" || sku=="not found on page")
+		{
+
+			console.log(noskumsg);$("#"+shortBrand+"-images ul.parentUL").append("<li class='error'><p>"+noskumsg+"</p></li>");
+		}else
+		{
+			console.log("Matching SKU:",sku);
+			//set image vars
+			var prHei=375,prWid=500,prdSize="$mproductsmall",innerLoopText='';
+			// iterate through
+			for (var i=0;i<=15;i++)
+				{
+					innerLoopText+='\t\t\t<li name="alt_'+i+'"><img src="https://turn5.scene7.com/is/image/Turn5/'+sku+"_alt"+i+'?'+prdSize+'$&wid='+prWid+'&hei='+prHei+'" width="'+prWid+'" height="'+prHei+'" class="sku-image" title="'+sku+'_alt'+i+'" onerror=\'$(this).parent().remove();\' /></li>\n';
+				} // end of for loop
+				//fill and show relevant image-div
+				$("#"+shortBrand+"-images ul.parentUL").append(innerLoopText).parent().removeClass("hidden");
+
+		} // end the if-else block
 
 
 
-
-
+} // end displaySKUImages
 
 
 
@@ -14516,13 +14511,13 @@ function printArrayItems(refArray)
 </div> <!-- end of notes-container div -->
 
 	<div id="content-div">
-		<div id='am-images' class='image-div'>
+		<div id='am-images' class='image-div clearfix hidden'>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 		</div>
-		<div id='xt-images' class='image-div'>
+		<div id='xt-images' class='image-div clearfix hidden'>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 		</div>
-		<div id='at-images' class='image-div'>
+		<div id='at-images' class='image-div clearfix hidden'>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 		</div>
 
