@@ -14246,6 +14246,9 @@
 
 function printArrayItems(refArray)
 {
+
+	// clear the image divs from previous dropdown / searches
+	$(".image-div").empty(); // checked
 	// print array items will drop each of the items in their appropriately named bucket (hint there's 3 of them: AM, AT[f150,silv,sier,ram,dodge],XT)
 		$.each(refArray,function(key, val)
 			{
@@ -14255,11 +14258,10 @@ function printArrayItems(refArray)
 					$("#photonotes").empty().append('<label for="photonotes">Photo Notes</label>');
 				// clear the retouch notes:
 					$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
-
 					// populate AM
-					if (val["Brand"]=="American Muscle"){$("#am-images").empty().append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end americanmuscle
-					else if (val["Brand"]=="Extreme Terrain"){$("#xt-images").empty().append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Extreme Terrain
-					else {$("#at-images").empty().append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Trucks
+					if (val["Brand"]=="American Muscle"){$("#am-images").append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end americanmuscle
+					else if (val["Brand"]=="Extreme Terrain"){$("#xt-images").append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Extreme Terrain
+					else {$("#at-images").append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Trucks
 
 						// populate photonotes
 						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p>");
@@ -14341,7 +14343,7 @@ function displaySKUImages(bra,sku){
 							$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
 						// set the compare array to empty, we will build the options from there!
 						// empty the image-div's
-						$(".image-div").empty();
+						//$(".image-div").empty();
 
 							var subCatCompareArray = [];  // compare the subCategory entries, initialize empty array
 							$.each(bigData[catSelected],function(key, val)
@@ -14476,7 +14478,8 @@ function displaySKUImages(bra,sku){
 							});
 								// end of array iterate, found our data, lets display them!
 								printArrayItems(skuListArray);
-								$("body").append("<div id='credits'>Image Lookup v3.5.5 | Questions send to <a href='mailto:chris.string@turn5.com'>Topher Null</a></div>"); // append credits
+								//show the credits!
+								$("#credits").removeClass("hidden");
 					});
 					// end itemsSelect change function!
 
@@ -14521,7 +14524,9 @@ function displaySKUImages(bra,sku){
 		</div>
 
 	</div><!-- end content-div -->
-
+	<div id="credits" class="hidden">Electric Sheep Template Fetcher v1.0 | Questions send to
+		<a href="mailto:chris.string@turn5.com">Topher Null</a>
+	</div>
 </body>
 
 </html>
