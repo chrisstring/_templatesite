@@ -4,4 +4,4 @@ This enables production teams to [ ] Live search templates as well as navigate s
 
 - [x] Develop JSON array crawl routine
 - [x] Build Structure for MENUS
-- [o] Recreate functions from the JERRY to be used in popuating DIVS with image data from the corresponding images.
+- [ ] Recreate functions from the JERRY to be used in popuating DIVS with image data from the corresponding images.
