@@ -6,7 +6,6 @@
 		p {line-height:1.8em; color:#777;}
 		form{margin-bottom:0;}
 		form input, #exportcsv {padding:1em;border:none;}
-		#ir_name{border: 1px #d0d0d0 solid;}
 
 		ul {list-style-type:none;}
 		CANCEL.clear {clear: both;}
@@ -31,14 +30,13 @@
 			#photonotes p.am, #am-images{border-color:#20ccf7;}
 			#photonotes p.xt, #xt-images{border-color:#f5c05a;}
 		label {font-weight:bold;}
-		/* #nav-form{width:100%;margin:0;background-color:#354b66;padding:.5em;margin-bottom:1em;}*/
 		#drop-nav{/*width:100%;*/ margin:0;background-color:#354b66;padding:0;margin-bottom:1em;}
-		#nav-form{padding:.5em;}
+		#nav-form,#credits{padding:.5em;}
 		#content-div{width:100%;margin:0;padding:0;}
 		.image-div {margin:1em 0 0 0;padding:1em 1em 1em .5em;border-left:.5em solid #fff;border-right:10em solid #fff;background:#fcfcfc;}
 
 		ul.parentUl li {float:left;}
-		ul.parentUl li p {font-size:.8em;}
+		ul.parentUl li p, #credits {font-size:.8em;}
 
 		.hidden{display:none;}
 
@@ -14478,6 +14476,7 @@ function displaySKUImages(bra,sku){
 							});
 								// end of array iterate, found our data, lets display them!
 								printArrayItems(skuListArray);
+								$("body").append("<div id='credits'>Image Lookup v3.5.5 | Questions send to <a href='mailto:chris.string@turn5.com'>Topher Null</a></div>"); // append credits
 					});
 					// end itemsSelect change function!
 
@@ -14502,28 +14501,26 @@ function displaySKUImages(bra,sku){
 <div id="notes-container" class="clearfix">
 	<div id="photonotes" class="divnotes">
 		<label for="photonotes">Photo Notes</label>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+		<p>Relevant Photo notes will be placed here for photographers. If you need to add to them, please let me know.</p>
 	</div><!-- end photonotes div -->
 	<div id="retouchnotes" class="divnotes">
 		<label for="retouchnotes">Retouch Notes</label>
-		<p>Nullam consequat enim id ex fermentum, sed faucibus nisl rhoncus. Sed ultrices feugiat consequat. Aliquam erat volutpat. Suspendisse sodales risus vitae justo elementum, vel commodo lacus mollis. Etiam at odio eget ex fermentum porta. Aliquam dolor erat, tincidunt et faucibus et, egestas vitae eros. Nam urna arcu, cursus id mauris eu, scelerisque convallis augue. Nulla dapibus ac ligula sed cursus. Aenean pulvinar nisl ac euismod euismod.</p>
+		<p>Relevant Retouch notes will be placed here for photographers. If you need to add to them, please let me know.</p>
 	</div><!-- end retouchnotes div -->
 </div> <!-- end of notes-container div -->
 
 	<div id="content-div">
 		<div id='am-images' class='image-div clearfix hidden'>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+<p></p>
 		</div>
 		<div id='xt-images' class='image-div clearfix hidden'>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+<p></p>
 		</div>
 		<div id='at-images' class='image-div clearfix hidden'>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
+<p></p>
 		</div>
 
 	</div><!-- end content-div -->
-
-
 
 </body>
 
