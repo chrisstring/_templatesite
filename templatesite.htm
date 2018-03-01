@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Display Template: Development</title>
+		<title>Electric Sheep v1.0</title>
 		<style>
 		body {font-family:Futura, "Trebuchet MS", Arial, sans-serif; padding:0;margin:0;}
 		p {line-height:1.8em; color:#777;}
@@ -56,14 +56,15 @@
 		#retouchnotes {border-color:#354355;}
 		#photonotes{border-color:#a5c785;}
 		p.am, p.xt,p.at {border-left:3px solid #ccc;padding-left:1em;}
-			#photonotes p.at{border-left-color:#a3406a;}
-			#photonotes p.am{border-left-color:#85a9c7;}
-			#photonotes p.xt{}
+			#photonotes p.at, #at-images{border-color:#a3406a;}
+			#photonotes p.am, #am-images{border-color:#20ccf7;}
+			#photonotes p.xt, #xt-images{border-color:#f5c05a;}
 		label {font-weight:bold;}
 		/* #nav-form{width:100%;margin:0;background-color:#354b66;padding:.5em;margin-bottom:1em;}*/
-		#drop-nav{width:100%;margin:0;background-color:#354b66;padding:.5em;margin-bottom:1em;}
-		#content-div{width:100%;margin:0;padding:1em;}
-
+		#drop-nav{/*width:100%;*/ margin:0;background-color:#354b66;padding:0;margin-bottom:1em;}
+		#nav-form{padding:.5em;}
+		#content-div{width:100%;margin:0;padding:0;}
+		.image-div {margin:.25em 0 0 0;padding:1em 1em 1em .5em;border-left:.25em solid #fff;border-right:.25em solid #fff;background:#fcfcfc;}
 		</style>
 
 			<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -14271,10 +14272,29 @@
 function printArrayItems(refArray)
 {
 	// print array items will drop each of the items in their appropriately named bucket (hint there's 3 of them: AM, AT[f150,silv,sier,ram,dodge],XT)
-	if(refArray.length==1){/*alert("array is 1 entry long!");*/}
-
 		$.each(refArray,function(key, val)
 			{
+				console.log("captains log: ",val);
+				// populate the notes.
+				// clear the photo notes:
+					$("#photonotes").empty().append('<label for="photonotes">Photo Notes</label>');
+				// clear the retouch notes:
+					$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
+
+					// populate AM
+					if (val["Brand"]=="American Muscle"){$("#am-images").empty().append(val["Matching SKU"]);} // end americanmuscle
+					else if (val["Brand"]=="Extreme Terrain"){$("#xt-images").empty().append(val["Matching SKU"]);} // end Extreme Terrain
+					else {$("#at-images").empty().append(val["Matching SKU"]);} // end Trucks
+
+						// populate photonotes
+						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p>");
+						if (val["Retouch Notes"]!=null)$("#retouchnotes").append("<p>"+val["Retouch Notes"]+"</p>");
+
+
+
+
+
+
 
 			}); // end of refArray iteration
 }
@@ -14327,6 +14347,9 @@ function printArrayItems(refArray)
 						// clear the retouch notes:
 							$("#retouchnotes").empty().append('<label for="retouchnotes">Retouch Notes</label>');
 						// set the compare array to empty, we will build the options from there!
+						// empty the image-div's
+						$(".image-div").empty();
+
 							var subCatCompareArray = [];  // compare the subCategory entries, initialize empty array
 							$.each(bigData[catSelected],function(key, val)
 							{
@@ -14380,6 +14403,8 @@ function printArrayItems(refArray)
 						console.log("Subcategory:",subCatSelected);
 						//clear the items-select list
 						$('#items-select').empty();
+						// empty the image-div's
+						$(".image-div").empty();
 
 						// populate first item
 						$("#items-select").append("<option>Select Item</option>");
@@ -14490,14 +14515,14 @@ function printArrayItems(refArray)
 	</div><!-- end retouchnotes div -->
 </div> <!-- end of notes-container div -->
 
-	<div id="content-div" class="">
-		<div id='am-images' class='fullwidth'>
+	<div id="content-div">
+		<div id='am-images' class='image-div'>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 		</div>
-		<div id='xt-images' class='fullwidth'>
+		<div id='xt-images' class='image-div'>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 		</div>
-		<div id='at-images' class='fullwidth'>
+		<div id='at-images' class='image-div'>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in feugiat ipsum, id auctor ligula. Nam nisl nisi, egestas eu mi venenatis, auctor tristique risus. Duis libero nibh, tincidunt sed metus eget, luctus sagittis nunc. Praesent congue mauris id ex tristique sollicitudin. Vestibulum rhoncus et lacus id aliquet. Vivamus mattis tempus orci at tristique. Fusce sem justo, mollis non urna a, vestibulum tincidunt augue. Curabitur neque velit, pellentesque ac sodales sit amet, venenatis pretium felis.</p>
 		</div>
 
