@@ -39,6 +39,9 @@
 		ul.parentUl li p, #credits {font-size:.8em;}
 
 		.hidden{display:none;}
+		a {text-decoration:none;}
+		a:link{font-weight:bold;}
+
 
 		</style>
 
@@ -14288,6 +14291,12 @@ function displaySKUImages(bra,sku){
 			//set image vars
 			var prHei=375,prWid=500,prdSize="$mproductsmall",innerLoopText='';
 			// iterate through
+
+			// Bugfix: https://github.com/chrisstring/_templatesite/issues/5
+			// print main image
+
+			innerLoopText+='\t\t\t<li name="main"><img src="https://turn5.scene7.com/is/image/Turn5/'+sku+'?'+prdSize+'$&wid='+prWid+'&hei='+prHei+'" width="'+prWid+'" height="'+prHei+'" class="sku-image" title="'+sku+' Main image" onerror=\'$(this).parent().remove();\' /></li>\n';
+
 			for (var i=0;i<=15;i++)
 				{
 					innerLoopText+='\t\t\t<li name="alt_'+i+'"><img src="https://turn5.scene7.com/is/image/Turn5/'+sku+"_alt"+i+'?'+prdSize+'$&wid='+prWid+'&hei='+prHei+'" width="'+prWid+'" height="'+prHei+'" class="sku-image" title="'+sku+'_alt'+i+'" onerror=\'$(this).parent().remove();\' /></li>\n';
@@ -14504,11 +14513,14 @@ function displaySKUImages(bra,sku){
 <div id="notes-container" class="clearfix">
 	<div id="photonotes" class="divnotes">
 		<label for="photonotes">Photo Notes</label>
-		<p>Relevant Photo notes will be placed here for photographers. If you need to add to them, please let me know.</p>
+		<p>Relevant Photo notes will be placed here for photographers. If you need to add to them, please let me know by opening a new ISSUE here:</p>
+		<p><a href="https://github.com/chrisstring/_templatesite/issues">Bug Tracking</a></p>
 	</div><!-- end photonotes div -->
 	<div id="retouchnotes" class="divnotes">
 		<label for="retouchnotes">Retouch Notes</label>
 		<p>Relevant Retouch notes will be placed here for photographers. If you need to add to them, please let me know.</p>
+		<p><a href="https://github.com/chrisstring/_templatesite/issues">Bug Tracking</a></p>
+		<p>Please mark issues with relevant tags on the right side (bug, question, feature-request) </p>
 	</div><!-- end retouchnotes div -->
 </div> <!-- end of notes-container div -->
 
