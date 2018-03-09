@@ -14248,7 +14248,8 @@ function printArrayItems(refArray)
 					else {$("#at-images").append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Trucks
 
 						// populate photonotes
-						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p>");
+						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p><p class='installer-notes'></p>");
+							if (val["Photo Install Notes"]!=null){$("#photonotes p.installer-notes").append("<em>Installer Notes:</em><br/>"+val["Photo Install Notes"]);}
 						if (val["Retouch Notes"]!=null)$("#retouchnotes").append("<p>"+val["Retouch Notes"]+"</p>");
 
 
