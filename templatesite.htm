@@ -39,12 +39,10 @@
 		ul.parentUl li p, #credits {font-size:.8em;}
 
 		.hidden{display:none;}
-<<<<<<< HEAD
 		a {text-decoration:none;}
 		a:link{font-weight:bold;}
 		.sku-image{padding:.25em;background-color:#f3f3f3;}
-=======
->>>>>>> master
+
 
 		</style>
 
@@ -95,13 +93,12 @@
          "Subcategory": "Apparel",
          "Subcategory2": null,
          "Brand": "American Muscle",
-<<<<<<< HEAD
          "Item": "Shirts, Hoodies, Jackets",
          "Matching SKU": "389186",
-=======
+
          "Item": "T-Shirts, Hoodies, Jackets",
          "Matching SKU": "T533213",
->>>>>>> master
+
          "Photo URL": "https://www.americanmuscle.com/rtr-blue-funhaver-tshirt-2.html",
          "Photo Notes": "If there is a logo on the sleeve, please include 3/4 shot. When shooting multiple t-shirts in a job, please vary the poses slightly",
          "Retouch Notes": null,
@@ -727,8 +724,6 @@
          "Subcategory": "Apparel",
          "Subcategory2": null,
          "Brand": "Trucks",
-<<<<<<< HEAD
-=======
          "Item": "Men's T-Shirts",
          "Matching SKU": "T533213",
          "Photo URL": "https://www.americanmuscle.com/rtr-blue-funhaver-tshirt-2.html",
@@ -748,7 +743,7 @@
          "Subcategory": "Apparel",
          "Subcategory2": null,
          "Brand": "Trucks",
->>>>>>> master
+
          "Item": "Hats",
          "Matching SKU": "383808",
          "Photo URL": "http://www.americanmuscle.com/rtr-flexfit-hat-black.html",
@@ -14278,12 +14273,12 @@ function printArrayItems(refArray)
 					else {$("#at-images").append("<ul class='parentUl'></ul>");displaySKUImages(val["Brand"],val["Matching SKU"]);} // end Trucks
 
 						// populate photonotes
-<<<<<<< HEAD
+
 						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p><p class='installer-notes'></p>");
 							if (val["Photo Install Notes"]!=null){$("#photonotes p.installer-notes").append("<em>Installer Notes:</em><br/>"+val["Photo Install Notes"]);}
-=======
+
 						if (val["Photo Notes"]!=null)$("#photonotes").append("<p>"+val["Photo Notes"]+"</p>");
->>>>>>> master
+
 						if (val["Retouch Notes"]!=null)$("#retouchnotes").append("<p>"+val["Retouch Notes"]+"</p>");
 
 
@@ -14307,15 +14302,15 @@ function displaySKUImages(bra,sku){
 			//set image vars
 			var prHei=375,prWid=500,prdSize="$mproductsmall",innerLoopText='';
 			// iterate through
-<<<<<<< HEAD
+
 
 			// Bugfix: https://github.com/chrisstring/_templatesite/issues/5
 			// print main image
 
 			innerLoopText+='\t\t\t<li name="main"><img src="https://turn5.scene7.com/is/image/Turn5/'+sku+'?'+prdSize+'$&wid='+prWid+'&hei='+prHei+'" width="'+prWid+'" height="'+prHei+'" class="sku-image" title="'+sku+' Main image" onerror=\'$(this).parent().remove();\' /></li>\n';
 
-=======
->>>>>>> master
+
+
 			for (var i=0;i<=15;i++)
 				{
 					innerLoopText+='\t\t\t<li name="alt_'+i+'"><img src="https://turn5.scene7.com/is/image/Turn5/'+sku+"_alt"+i+'?'+prdSize+'$&wid='+prWid+'&hei='+prHei+'" width="'+prWid+'" height="'+prHei+'" class="sku-image" title="'+sku+'_alt'+i+'" onerror=\'$(this).parent().remove();\' /></li>\n';
@@ -14532,21 +14527,21 @@ function displaySKUImages(bra,sku){
 <div id="notes-container" class="clearfix">
 	<div id="photonotes" class="divnotes">
 		<label for="photonotes">Photo Notes</label>
-<<<<<<< HEAD
+
 		<p>Relevant Photo notes will be placed here for photographers. If you need to add to them, please let me know by opening a new ISSUE here:</p>
 		<p><a href="https://github.com/chrisstring/_templatesite/issues">Bug Tracking</a></p>
-=======
+
 		<p>Relevant Photo notes will be placed here for photographers. If you need to add to them, please let me know.</p>
->>>>>>> master
+
 	</div><!-- end photonotes div -->
 	<div id="retouchnotes" class="divnotes">
 		<label for="retouchnotes">Retouch Notes</label>
 		<p>Relevant Retouch notes will be placed here for photographers. If you need to add to them, please let me know.</p>
-<<<<<<< HEAD
+
 		<p><a href="https://github.com/chrisstring/_templatesite/issues">Bug Tracking</a></p>
 		<p>Please mark issues with relevant tags on the right side (bug, question, feature-request) </p>
-=======
->>>>>>> master
+
+
 	</div><!-- end retouchnotes div -->
 </div> <!-- end of notes-container div -->
 
